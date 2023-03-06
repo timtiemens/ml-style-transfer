@@ -28,7 +28,7 @@ The following are required to run the application in secretshare.jar:
 
 TODO - install NVidia CUDA, update install instructions.
 
-Note: not all the packages in requirements.txt are used by this project.  Instead, requirements.txt is a list of "generic machine learning packages". 
+Note: not all the packages in requirements.txt are used by this project.  Instead, the requirements.txt is a superset of "machine learning packages" used by various machine-learning projects. 
 
 ## Running
 
@@ -59,7 +59,7 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
    See nsg-standalone.py, at the top, variable 'inputJson' to find the configuration
    parameters that are used each run.  In order of importance aka which ones are you likely to
    change:
-   1. content_iamge_filename
+   1. content_image_filename
    2. style_image_filename
    3. epochs
    4. save_epoch_every and print_epoch_every
