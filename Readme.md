@@ -42,10 +42,10 @@ The default configuration takes about 2 minutes to complete (on relatively recen
 
 ## Pre-trained data
 
-Also available from kaggle, from https://www.kaggle.com/datasets/kmader/full-keras-pretrained-no-top.  It a file that is part of a 1-gigabyte download, though.
+Also available from [kaggledataset].  It a file that is part of a 1-gigabyte download, though.
 
-This is used by tf.keras.applications.VGG19, see https://www.tensorflow.org/api_docs/python/tf/keras/applications/vgg19/VGG19
-and https://keras.io/api/applications/#usage-examples-for-image-classification-models
+This is used by tf.keras.applications.VGG19, see [tensorflowVGG19].
+and [kerasimageclassificaton].
 
 
 
@@ -63,28 +63,36 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
    2. style_image_filename
    3. epochs
    4. save_epoch_every and print_epoch_every
+
    Actual MM neural net parameters:
    1. adam_learning_rate
    2. alpha (content) and beta (style)
    3. style_layers
-   
 
 
+## Timings
+
+  1. Intel i5-12600 6 cores, 12 vcores, 3.3 GHz
+     a. Windows Subsystem Linux, Ubuntu 22.04
+        i. Standard (250 epoch, louvre, monet) - 138 seconds (180 seconds elapsed)
+     b. Windows 11, cmd shell
+        i. Standard (250 epoch, louvre, monet) - 201 seconds (210 seconds elapsed)
+  2. Intel Xeon E5-2640 12 cores, 2.5Ghz, 64 GB RAM, CentOS, VMworkstation
+     a. Virtual Machine, Ubuntu 22.04, 4 cores, 8 GB RAM
+        i. Standard (250 epoch, louvre, monet) - 1010 seconds (1050 seconds elapsed)
+  3. 2x Intel Xeon, E5-2680, 20 cores, 40 vcores, 2.8Ghz, 256 GB RAM, Windows, VMworkstation
+     a. Virtual Machine, Ubuntu 22.04, 8 cores, 16 GB RAM
+        i. Standard (250 epoch, louvre, money) -  599 seconds (605 seconds elapsed)
 
 
 
 ## Additional Documentation
 
-[Original Sourceforge Secret Sharing in Java] - original SCM location.  Out-of-date.
-
-[Resources] - more links to useful Shamir Secret Share documentation and projects
+[Resources] - TBD
 
 
-[Original Sourceforge Secret Sharing in Java]:http://secretsharejava.sourceforge.net/
+[kaggledataset]:https://www.kaggle.com/datasets/kmader/full-keras-pretrained-no-top
+[tensorflowVGG19]:https://www.tensorflow.org/api_docs/python/tf/keras/applications/vgg19/VGG19
+[kerasimageclassification]:https://keras.io/api/applications/usage-examples-for-image-classification-models
+
 [Resources]:extrastuff/resources.md
-[SecretShare1.4.1]:http://mvnrepository.com/artifact/com.tiemens/secretshare/1.4.1
-[SecretShare1.4.2]:http://mvnrepository.com/artifact/com.tiemens/secretshare/1.4.2
-[SecretShare1.4.3]:http://mvnrepository.com/artifact/com.tiemens/secretshare/1.4.3
-[SecretShare 1.4.4]:http://mvnrepository.com/artifact/com.tiemens/secretshare/1.4.4
-[SecretShare 1.4.4 Release Tag]:https://github.com/timtiemens/secretshare/releases/tag/v1.4.4
-[SecretShare 1.4.4 Maven Central]:http://mvnrepository.com/artifact/com.tiemens/secretshare/1.4.4
