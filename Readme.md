@@ -73,16 +73,16 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
 ## Timings
 
 1. Intel i5-12600 6 cores, 12 vcores, 3.3 GHz
-    a. Windows Subsystem Linux, Ubuntu 22.04
-        i. Standard (250 epoch, louvre, monet) - 138 seconds (180 seconds elapsed)
-    b. Windows 11, cmd shell
-        i. Standard (250 epoch, louvre, monet) - 201 seconds (210 seconds elapsed)
+    1. Windows Subsystem Linux, Ubuntu 22.04
+        1. Standard (250 epoch, louvre, monet) - 138 seconds (180 seconds elapsed)
+    2. Windows 11, cmd shell
+        1. Standard (250 epoch, louvre, monet) - 201 seconds (210 seconds elapsed)
 2. Intel Xeon E5-2640 12 cores, 2.5Ghz, 64 GB RAM, CentOS, VMworkstation
-    a. Virtual Machine, Ubuntu 22.04, 4 cores, 8 GB RAM
-        i. Standard (250 epoch, louvre, monet) - 1010 seconds (1050 seconds elapsed)
+    1. Virtual Machine, Ubuntu 22.04, 4 cores, 8 GB RAM
+        1. Standard (250 epoch, louvre, monet) - 1010 seconds (1050 seconds elapsed)
 3. 2x Intel Xeon, E5-2680, 20 cores, 40 vcores, 2.8Ghz, 256 GB RAM, Windows, VMworkstation
-    a. Virtual Machine, Ubuntu 22.04, 8 cores, 16 GB RAM
-        i. Standard (250 epoch, louvre, money) -  599 seconds (605 seconds elapsed)
+    1. Virtual Machine, Ubuntu 22.04, 8 cores, 16 GB RAM
+        1. Standard (250 epoch, louvre, money) -  599 seconds (605 seconds elapsed)
 
 
 
