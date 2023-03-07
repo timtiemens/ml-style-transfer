@@ -155,7 +155,10 @@ def get_auto_output_dir_this_run(topdir, zeropaddigits=4,
     dirs = [f for f in alllist if os.path.isdir(topdir + "/" + f)]
     numbers = get_numbers_from_filenames(dirs, "output", "")
     numbers = sorted(numbers, key=int)
-    highest = numbers[-1]
+    if numbers and len(numbers) > 0:
+        highest = numbers[-1]
+    else:
+        highest = 49
     #print("Highest is " + str(highest))
     nextnumber = highest + 2
     format_string = f'0{zeropaddigits}d'
