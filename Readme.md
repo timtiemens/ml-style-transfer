@@ -69,6 +69,18 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
    2. alpha (content) and beta (style)
    3. style_layers
 
+## Standard Run
+
+The standard run uses the louvre image for content and the monet image for
+style, and runs 250 epochs to create the output image:
+
+
+<img src="images/louvre_small.jpg" width=400 height=400>
+<img src="images/monet.jpg" width=400 height=400>
+<p align="center"><img src="images/sample_louvre_monet_250.jpg" width=400 height=400></p>
+
+
+
 
 ## Timings
 
