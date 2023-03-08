@@ -76,9 +76,9 @@ style, and runs 250 epochs to create the output image:
 
 | Type |  |
 | --- | ----------- |
-| Content | ![Louvre](images/louvre_small.jpg) |
-| Style   | ![Monet](images/monet.jpg) |
-| Output  | ![LouvreMonet](images/sample_louvre_monet_250.jpg) |
+| Content | <img src="images/louvre_small.jpg" width=400 height=400> |
+| Style   | <img src="images/monet.jpg" width=400 height=400> |
+| Output  | <img src="images/sample_louvre_monet_250.jpg" width=400 height=400> |
 
 
 
