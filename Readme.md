@@ -74,10 +74,13 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
 The standard run uses the louvre image for content and the monet image for
 style, and runs 250 epochs to create the output image:
 
+| Type |  |
+| --- | ----------- |
+| Content | ![Louvre](images/louvre_small.jpg) |
+| Style   | ![Monet](images/monet.jpg) |
+| Output  | ![LouvreMonet](images/sample_louvre_monet_250.jpg) |
 
-<img src="images/louvre_small.jpg" width=400 height=400>
-<img src="images/monet.jpg" width=400 height=400>
-<p align="center"><img src="images/sample_louvre_monet_250.jpg" width=400 height=400></p>
+
 
 
 
