@@ -151,7 +151,14 @@ def get_numbers_from_filenames(allfilenames, prefix, postfix):
 
 def get_auto_output_dir_this_run(topdir, zeropaddigits=4,
                                  prefix='output', postfix=''):
+    """
+    When the inputJson says 'auto' for the 'output_dir_this_run' value,
+    the actual value is computed by looking at existing outputNNNNN directories,
+    then adding two.
+    """
     alllist = os.listdir(topdir)
+    # "topdir" is a directory ("outputs") that contains more directories
+    #    (output0053/, output0055/, etc.)
     dirs = [f for f in alllist if os.path.isdir(topdir + "/" + f)]
     numbers = get_numbers_from_filenames(dirs, "output", "")
     numbers = sorted(numbers, key=int)
@@ -166,7 +173,17 @@ def get_auto_output_dir_this_run(topdir, zeropaddigits=4,
     retdirname = "" + prefix + zeropad + postfix
     return retdirname
 
-def process_input_json(inputJson):
+def process_available_json(availableJson):
+    """
+    Make sure everything in availableJson is an actual file
+    """
+    for key in availableJson.keys():
+        for itemkey in availableJson[key].keys():
+            filename = availableJson[key][itemkey]
+            if not os.path.isfile(filename):
+                die(f"Available file {key} {itemkey} file {filename} not found")
+
+def process_input_json(inputJson, availableJson=None):
     """
     Perform all validation and processing on inputJson
     """
@@ -174,6 +191,11 @@ def process_input_json(inputJson):
     #   Then - make sure it is not currently a directory, then make it
     # Second: check files exist: cotent_image_filename, etc.
     # Third set the random seed if found in inputJson
+
+    # a little bit of 'this before that' problem - availableJson gets used
+    #   in inputJson
+    if availableJson:
+        process_available_json(availableJson)
 
     dirtop = inputJson['output_dir_top']
     if not os.path.isdir(dirtop):
@@ -423,7 +445,7 @@ if __name__ == '__main__':
     #
     # validate and pre-process everything in inputJson configuration:
     #
-    process_input_json(inputJson)
+    process_input_json(inputJson, availableJson)
     print("Input Json process complete")
 
     time_start = int(time.time())    
