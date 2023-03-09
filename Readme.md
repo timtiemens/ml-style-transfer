@@ -92,6 +92,8 @@ style, and runs 250 epochs to create the output image:
         1. Standard (250 epoch, louvre, monet) - 138 seconds (180 seconds elapsed)
     2. Windows 11, cmd shell
         1. Standard (250 epoch, louvre, monet) - 201 seconds (210 seconds elapsed)
+    3. Windows 11, miniconda, CUDA 11.2, cudnn 8.1.0, RTX 3080Ti GPU
+        1. Standard (250 epoch, louvre, monet) -  12 seconds (16 seconds elapsed)
 2. Intel Xeon E5-2640 12 cores, 2.5Ghz, 64 GB RAM, CentOS, VMworkstation
     1. Virtual Machine, Ubuntu 22.04, 4 cores, 8 GB RAM
         1. Standard (250 epoch, louvre, monet) - 1010 seconds (1050 seconds elapsed)
