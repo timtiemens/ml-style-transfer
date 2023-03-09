@@ -17,6 +17,7 @@ import time
 import datetime
 import json
 import re
+import argparse
 #%matplotlib inline
 
 # version of this script:
@@ -173,6 +174,27 @@ def get_auto_output_dir_this_run(topdir, zeropaddigits=4,
     retdirname = "" + prefix + zeropad + postfix
     return retdirname
 
+
+def apply_as_override(source, original, updates):
+    """
+    Take values from updates and place in/over original.
+    """
+    for key in updates:
+        if key in original:
+            do_override = True
+            if key == 'output_dir_this_run':
+                # this one is problematice, since 'auto' turned into a real,
+                # concrete, directory name.
+                do_override = False
+
+            if do_override:
+                val = updates[key]
+                update = updates[key]
+                original[key] = update
+                #print(f"override {key} from {val} to {update}")
+        else:
+            die(f"Overrides from {source} has an unknown key {key}")
+
 def process_available_json(availableJson):
     """
     Make sure everything in availableJson is an actual file
@@ -183,17 +205,46 @@ def process_available_json(availableJson):
             if not os.path.isfile(filename):
                 die(f"Available file {key} {itemkey} file {filename} not found")
 
-def process_input_json(inputJson, availableJson=None):
+def process_input_json(args, inputJson, availableJson=None):
     """
     Perform all validation and processing on inputJson
     """
+    # Zeroth:  first, look in args for JSON files to override our inputJson
+    if args.inputJson:
+        for jsonFilename in args.inputJson:
+            if os.path.isfile(jsonFilename):
+                with open(jsonFilename, 'r') as f:
+                    data = json.load(f)
+                    apply_as_override(jsonFilename, inputJson, data)
+            else:
+                die(f".json file not found: {jsonFilename}")
+
+
+
+    # Zeroth-B: use command-line args to override everything
+    if args:
+        if args.epochs:
+            inputJson['epochs'] = args.epochs
+        if args.content:
+            inputJson['content_image_filename'] = args.content
+        if args.style:
+            inputJson['style_iamge_filename'] = args.style
+        if args.learningRate:
+            inputJson['adam_learning_rate'] = args.learningRate
+        if args.saveEveryEpoch:
+            inputJson['save_epoch_every'] = args.saveEveryEpoch
+        if args.seed:
+            inputJson['tf.random.seed'] = args.seed
+
     # First: set inputJson['output_dir_this_run']
     #   Then - make sure it is not currently a directory, then make it
-    # Second: check files exist: cotent_image_filename, etc.
+    # Second: check files exist: content_image_filename, etc.
     # Third set the random seed if found in inputJson
+    # Fourth: adjust number of epochs if (epochs % save_epoch_every == 0)
 
-    # a little bit of 'this before that' problem - availableJson gets used
-    #   in inputJson
+    # note: the python 'availableJson' is used to create the python 'inputJson',
+    #       but none of the override .json files has the ability to "see"
+    #       values from availableJson
     if availableJson:
         process_available_json(availableJson)
 
@@ -229,6 +280,8 @@ def process_input_json(inputJson, availableJson=None):
         print(f"NOTE: setting seed to {setit}")
         tf.random.set_seed(setit)
 
+    if inputJson['epochs'] % inputJson['save_epoch_every'] == 0:
+        inputJson['epochs'] = inputJson['epochs'] + 1
 
 
 def content_compute_cost(content_output, generated_output):
@@ -440,13 +493,29 @@ def train_tape_step(generated_image, optimizer, alpha, beta, style_layers):
 
 
 
+def create_argparse():
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("--epochs", help="number of epochs", type=int)
+    arg_parser.add_argument("--content", help="content image filename", type=str)
+    arg_parser.add_argument("--style", help="style image filename", type=str)
+    arg_parser.add_argument("--learningRate", help="Adam learning rate 0.01 to 0.5", type=float)
+    arg_parser.add_argument("--saveEveryEpoch", help="save image every Nth epoch", type=int)
+    arg_parser.add_argument("--seed", help="set the TF seed to this integer", type=int)
+
+    # allow 0+ additional .json files to be used "over top of" inputJson
+    arg_parser.add_argument("--inputJson", help="additional input.json file to read, in order", type=str, nargs='+')
+
+    return arg_parser
+
+
 
 if __name__ == '__main__':
+    args = create_argparse().parse_args()
+
     #
     # validate and pre-process everything in inputJson configuration:
     #
-    process_input_json(inputJson, availableJson)
-    print("Input Json process complete")
+    process_input_json(args, inputJson, availableJson)
 
     time_start = int(time.time())    
     vgg = get_vgg(inputJson['image_size'],
