@@ -79,6 +79,8 @@ style, and runs 250 epochs to create the output image:
 | Content | <img src="images/louvre_small.jpg" width=400 height=400> |
 | Style   | <img src="images/monet.jpg" width=400 height=400> |
 | Output  | <img src="images/sample_louvre_monet_250.jpg" width=400 height=400> |
+| (this is Output at 2500 epochs)  | <img src="images/sample_louvre_monet_2500.jpg" width=400 height=400> |
+
 
 
 
