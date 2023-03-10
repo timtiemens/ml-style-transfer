@@ -228,7 +228,7 @@ def process_input_json(args, inputJson, availableJson=None):
         if args.content:
             inputJson['content_image_filename'] = args.content
         if args.style:
-            inputJson['style_iamge_filename'] = args.style
+            inputJson['style_image_filename'] = args.style
         if args.learningRate:
             inputJson['adam_learning_rate'] = args.learningRate
         if args.saveEveryEpoch:
