@@ -235,6 +235,10 @@ def process_input_json(args, inputJson, availableJson=None):
             inputJson['save_epoch_every'] = args.saveEveryEpoch
         if args.seed:
             inputJson['tf.random.seed'] = args.seed
+        if args.alpha:
+            inputJson['alpha'] = args.alpha
+        if args.beta:
+            inputJson['beta'] = args.beta
 
     # First: set inputJson['output_dir_this_run']
     #   Then - make sure it is not currently a directory, then make it
@@ -492,6 +496,23 @@ def train_tape_step(generated_image, optimizer, alpha, beta, style_layers):
     return J
 
 
+def fixslash(path_with_possible_backslashes):
+    '''
+    There is a bug in some of the input.json where the paths contain
+    the strings like "images\\monet.jpg" instead of "images/monet.jpg"
+    Fix that.
+    '''
+
+    ret = path_with_possible_backslashes.replace("\\", "/")
+    #print(f"in={path_with_possible_backslashes}  out={ret}")
+
+    return ret
+
+
+def fix_input_json(inputJson):
+    inputJson['content_image_filename'] = fixslash(inputJson['content_image_filename'] )
+    inputJson['style_image_filename'] = fixslash(inputJson['style_image_filename'] )
+
 
 def create_argparse():
     arg_parser = argparse.ArgumentParser()
@@ -501,6 +522,8 @@ def create_argparse():
     arg_parser.add_argument("--learningRate", help="Adam learning rate 0.01 to 0.5", type=float)
     arg_parser.add_argument("--saveEveryEpoch", help="save image every Nth epoch", type=int)
     arg_parser.add_argument("--seed", help="set the TF seed to this integer", type=int)
+    arg_parser.add_argument("--alpha", help="set the alpha (content) weight", type=int)
+    arg_parser.add_argument("--beta", help="set the beta (style) weight", type=int)
 
     # allow 0+ additional .json files to be used "over top of" inputJson
     arg_parser.add_argument("--inputJson", help="additional input.json file to read, in order", type=str, nargs='+')
@@ -574,6 +597,7 @@ if __name__ == '__main__':
     generated_image = tf.Variable(generated_image)
 
     output_dir = inputJson['output_dir_top'] + "/" + inputJson['output_dir_this_run']
+    fix_input_json(inputJson)
     with open(output_dir + "/input.json", "w") as f:
         f.write(json.dumps(inputJson, indent=4))
     
