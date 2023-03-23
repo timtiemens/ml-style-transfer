@@ -13,6 +13,9 @@ Table of contents
  * [Pre-trained Data](#pre-trained-data)
  * [Architecture Documentation](#architecture-documentation)
  * [Use](#use)
+ * [Standard Run](#standard-run)
+ * [More Examples](#more-examples)
+ * [Timings](#timings)
  * [Additional Documentation](#additional-documentation)
 
 
@@ -57,8 +60,8 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
 ## Use
 
    See nsg-standalone.py, at the top, variable 'inputJson' to find the configuration
-   parameters that are used each run.  In order of importance aka which ones are you likely to
-   change:
+   parameters that are used each run.
+   In order of importance aka the ones that  you likely to change:
    1. content_image_filename
    2. style_image_filename
    3. epochs
@@ -81,7 +84,10 @@ style, and runs 250 epochs to create the output image:
 | Output  | <img src="images/sample_louvre_monet_250.jpg" width=400 height=400> |
 | (this is Output at 2500 epochs)  | <img src="images/sample_louvre_monet_2500.jpg" width=400 height=400> |
 
+## More Examples
 
+See [ml-style-transfer-samples](https://github.com/timtiemens/ml-style-transfer-samples) for a more comprehensive list of example input.json files,
+and different style images and different content (base) images.
 
 
 
