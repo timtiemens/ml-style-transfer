@@ -45,10 +45,12 @@ The default configuration takes about 2 minutes to complete (on relatively recen
 
 ## Pre-trained data
 
-Also available from [kaggledataset].  It a file that is part of a 1-gigabyte download, though.
+The pre-trained [vgg19 weights .h5 file](pretrained-model/vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5) is in this repository as an 77 MB file.
+
+It is also available from [kaggledataset].  To get it, you have to download the entire 1 GB download, though.
 
 This is used by tf.keras.applications.VGG19, see [tensorflowVGG19].
-and [kerasimageclassificaton].
+and [kerasvgg19].
 
 
 
@@ -59,18 +61,18 @@ See tensorflow tutorial at https://www.tensorflow.org/tutorials/generative/style
 
 ## Use
 
-   See nsg-standalone.py, at the top, variable 'inputJson' to find the configuration
-   parameters that are used each run.
-   In order of importance aka the ones that  you likely to change:
-   1. content_image_filename
-   2. style_image_filename
-   3. epochs
-   4. save_epoch_every and print_epoch_every
+   See [nst-standalone.py](nst-standalone.py), at the top, variable 'inputJson' to find the configuration parameters that are used each run.
+   In order of importance aka the ones that you are most likely to change:
+   1. content_image_filename --content
+   2. style_image_filename --style
+   3. epochs --epochs
+   4. save_epoch_every and print_epoch_every --saveEveryEpoch
 
    Actual neural net parameters:
-   1. adam_learning_rate
-   2. alpha (content) and beta (style)
+   1. adam_learning_rate --learningRate
+   2. alpha (content) and beta (style) weights  --alpha and --beta
    3. style_layers
+   4. random generator seed --seed
 
 ## Standard Run
 
@@ -95,6 +97,10 @@ and different style images and different content (base) images.
 
 ## Timings
 
+**seconds** - from Python "finished" output
+
+**seconds elapsed** - wall-clock or "time" output
+
 1. Intel i5-12600 6 cores, 12 vcores, 3.3 GHz
     1. Windows Subsystem Linux, Ubuntu 22.04
         1. Standard (250 epoch, louvre, monet) - 138 seconds (180 seconds elapsed)
@@ -108,7 +114,21 @@ and different style images and different content (base) images.
 3. 2x Intel Xeon, E5-2680, 20 cores, 40 vcores, 2.8Ghz, 256 GB RAM, Windows, VMworkstation
     1. Virtual Machine, Ubuntu 22.04, 8 cores, 16 GB RAM
         1. Standard (250 epoch, louvre, money) -  599 seconds (605 seconds elapsed)
+4. AWS p3.2xlarge, [AWS p3](https://aws.amazon.com/ec2/instance-types/p3/), Intel Xeon Skylake 8175, 2.5 GHz, 8 vCPU, 61 GB RAM, 1 Tesla V100 GPU, $3.06/hour
+    1. ami-0649417d1ede3c91a, Ubuntu 20.04
+        1. Standard (250 epoch, louvre, monet) - 11 seconds (14 seconds elapsed)
+5. AWS t2.large, [AWS t2](https://aws.amazon.com/ec2/instance-types/t2/), Intel Xeon E5-2686 v4, 2.30GHz, 2 vCPU, 8 GB RAM, no GPU, $0.093/hour
+    1. ami-0649417d1ede3c91a, Ubuntu 20.04
+        1. Standard (250 epoch, louvre, monet) - 845 seconds (849 seconds elapsed)
+6. AWS c5.4xlarge, [AWS c5](https://aws.amazon.com/ec2/instance-types/c5/), Intel Platinum 8223CL, 3.0 GHz, 16 vCPU, 32 GB RAM, no GPU, $0.68/hour
+    1. ami-0649417d1ede3c91a, Ubuntu 20.04
+        1. Standard (250 epoch, louvre, monet) - 219 seconds (221 seconds elapsed)
 
+7. AWS inf1.xlarge, [AWS inf1](https://aws.amazon.com/ec2/instance-types/inf1/), Intel Xeon 8275CL, 3.0 GHz, 4 vCPU, 8 GB RAM, no GPU, $0.228/hour
+    1. ami-0649417d1ede3c91a, Ubuntu 20.04, See FootNote1
+        1. Standard (250 epoch, louvre, monet) - 484 seconds (490 seconds elapsed)
+
+FootNote1 - ami-0649417d1ede3c91a is probably the wrong AMI to use with this instance type.
 
 
 ## Additional Documentation
@@ -118,6 +138,6 @@ and different style images and different content (base) images.
 
 [kaggledataset]:https://www.kaggle.com/datasets/kmader/full-keras-pretrained-no-top
 [tensorflowVGG19]:https://www.tensorflow.org/api_docs/python/tf/keras/applications/vgg19/VGG19
-[kerasimageclassification]:https://keras.io/api/applications/usage-examples-for-image-classification-models
+[kerasvgg19]:https://keras.io/api/applications/vgg/#vgg19-function
 
 [Resources]:extrastuff/resources.md
