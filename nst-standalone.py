@@ -84,7 +84,6 @@ inputJson = {
 #        ('block4_conv1', 0.05),
 #        ('block5_conv1', 0.3)],
 
-    'content_image_filename_large': 'images/louvre.jpg',
 }
 
 
@@ -547,10 +546,6 @@ if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
     pp.pprint(vgg)
 
-
-    if False:
-        content_image = get_image(inputJson['content_image_filename_large'])
-        content_image    # display?  not in WSL   ?? in Ubun22
 
     if inputJson['print_layers']:
         for layer in vgg.layers:
