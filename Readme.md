@@ -108,6 +108,9 @@ and different style images and different content (base) images.
         1. Standard (250 epoch, louvre, monet) - 201 seconds (210 seconds elapsed)
     3. Windows 11, miniconda, CUDA 11.2, cudnn 8.1.0, RTX 3080Ti GPU
         1. Standard (250 epoch, louvre, monet) -  12 seconds (16 seconds elapsed)
+    4. Windows Subsystem Linux, Ubuntu 22.04, tensorflow 2.12.0, cudatoolkit 11.8.0, RTX 3080Ti GPU
+        1. Standard (250 epoch, louvre, monet) -  9 seconds (11 seconds elapsed)
+
 2. Intel Xeon E5-2640 12 cores, 2.5Ghz, 64 GB RAM, CentOS, VMworkstation
     1. Virtual Machine, Ubuntu 22.04, 4 cores, 8 GB RAM
         1. Standard (250 epoch, louvre, monet) - 1010 seconds (1050 seconds elapsed)
@@ -115,8 +118,9 @@ and different style images and different content (base) images.
     1. Virtual Machine, Ubuntu 22.04, 8 cores, 16 GB RAM
         1. Standard (250 epoch, louvre, money) -  599 seconds (605 seconds elapsed)
 4. AWS p3.2xlarge, [AWS p3](https://aws.amazon.com/ec2/instance-types/p3/), Intel Xeon Skylake 8175, 2.5 GHz, 8 vCPU, 61 GB RAM, 1 Tesla V100 GPU, $3.06/hour
-    1. ami-0649417d1ede3c91a, Ubuntu 20.04
+    1. ami-0649417d1ede3c91a, Ubuntu 20.04, tensorflow 2.12.0
         1. Standard (250 epoch, louvre, monet) - 11 seconds (14 seconds elapsed)
+
 5. AWS t2.large, [AWS t2](https://aws.amazon.com/ec2/instance-types/t2/), Intel Xeon E5-2686 v4, 2.30GHz, 2 vCPU, 8 GB RAM, no GPU, $0.093/hour
     1. ami-0649417d1ede3c91a, Ubuntu 20.04
         1. Standard (250 epoch, louvre, monet) - 845 seconds (849 seconds elapsed)
